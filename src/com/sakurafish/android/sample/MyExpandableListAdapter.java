@@ -2,6 +2,7 @@ package com.sakurafish.android.sample;
 
 import android.app.ExpandableListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 public class MyExpandableListAdapter extends ExpandableListActivity {
 
     ExpandableListAdapter mAdapter;
+    Intent intent = null;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,14 @@ public class MyExpandableListAdapter extends ExpandableListActivity {
         // 子要素がクリックされたら内容をToastで表示する
         Object o = mAdapter.getChild(groupPosition, childPosition);
         Toast.makeText(getApplicationContext(), o.toString(), Toast.LENGTH_SHORT).show();
+
+        intent = new Intent(MyExpandableListAdapter.this, HitokotoActivity.class);
+
+
+		//intent.putExtra("hitokoto", strHitokoto);
+		//次画面のアクティビティ起動
+		startActivity(intent);
+
 
         return super.onChildClick(parent, v, groupPosition, childPosition, id);
     }
@@ -131,6 +142,9 @@ public class MyExpandableListAdapter extends ExpandableListActivity {
         public long getGroupId(int groupPosition) {
             return groupPosition;
         }
+
+
+
 
         @Override
         public View getGroupView(int groupPosition, boolean isExpanded,
